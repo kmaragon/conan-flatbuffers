@@ -1,0 +1,7 @@
+namespace test.conan.flatbufferspkg;
+
+table test_flatbuffer_message {
+    message_id:string;
+    message_length:int;
+    message:string;
+}
