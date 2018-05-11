@@ -10,6 +10,7 @@ class FlatbuffersConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "enable_flatc": [True, False], "enable_flathash": [True, False]}
     default_options = "shared=False", "enable_flatc=True", "enable_flathash=True"
+    exports = 'BuildFlatbuffers.working_dir.cmake.patch'
     generators = "cmake"
 
     def source(self):
@@ -22,6 +23,8 @@ class FlatbuffersConan(ConanFile):
         tools.replace_in_file("flatbuffers-%s/CMakeLists.txt" % self.version, "project(FlatBuffers)", '''project(FlatBuffers)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()''')
+
+        tools.patch(base_path='flatbuffers-%s' % self.version, patch_file='BuildFlatbuffers.working_dir.cmake.patch')
 
     def build(self):
         cmake = CMake(self)
