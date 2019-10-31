@@ -4,6 +4,7 @@
 int main() {
     ::flatbuffers::FlatBufferBuilder builder;
     auto msgb = ::test::conan::flatbufferspkg::Createtest_flatbuffer_messageDirect(builder, "Hello", 5, "World");
+	builder.Finish(msgb);
 
     size_t size = builder.GetSize();
     uint8_t* data = builder.GetBufferPointer();

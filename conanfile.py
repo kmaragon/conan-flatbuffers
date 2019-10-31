@@ -3,7 +3,7 @@ import os
 
 class FlatbuffersConan(ConanFile):
     name = "flatbuffers"
-    version = "1.7.1"
+    version = "1.11.0"
     license = "Apache 2.0"
     url = "https://github.com/kmaragon/conan-flatbuffers"
     description = "Conan Package for google flatbuffers"
@@ -23,8 +23,6 @@ class FlatbuffersConan(ConanFile):
         tools.replace_in_file("flatbuffers-%s/CMakeLists.txt" % self.version, "project(FlatBuffers)", '''project(FlatBuffers)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()''')
-
-        tools.patch(base_path='flatbuffers-%s' % self.version, patch_file='BuildFlatbuffers.working_dir.cmake.patch')
 
     def build(self):
         cmake = CMake(self)
